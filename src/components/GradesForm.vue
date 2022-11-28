@@ -10,13 +10,24 @@
       <div class="col-md-2">
         <div class="form-group">
           <label for="">Units:</label>
-          <input type="text" class="form-control" v-model="grade.units" />
+          <input
+            type="number"
+            class="form-control"
+            v-model="grade.units"
+            :min="1"
+          />
         </div>
       </div>
       <div class="col-md-2">
         <div class="form-group">
           <label for="">Grade:</label>
-          <input type="text" class="form-control" v-model="grade.pointGrade" />
+          <input
+            type="number"
+            class="form-control"
+            v-model="grade.pointGrade"
+            :min="0"
+            :step="0.01"
+          />
         </div>
       </div>
     </div>
@@ -32,14 +43,14 @@
 </template>
 
 <script setup>
-import { reactive } from "vue";
-import { useGradesStore } from "../stores/grades";
+import { reactive } from "vue"
+import { useGradesStore } from "../stores/grades"
 
 const grade = reactive({
   subjectCode: "",
-  units: "",
-  pointGrade: "",
-});
+  units: 1,
+  pointGrade: 0,
+})
 
-const gradesStore = useGradesStore();
+const gradesStore = useGradesStore()
 </script>

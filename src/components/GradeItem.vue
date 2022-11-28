@@ -41,41 +41,48 @@
       {{ props.grade.subjectCode }}
     </div>
     <div class="col-2">
-      <input type="text" class="form-control" v-model="local_grade.units" />
+      <input
+        type="number"
+        class="form-control"
+        v-model="local_grade.units"
+        :min="1"
+      />
     </div>
     <div class="col-2">
       <input
-        type="text"
+        type="number"
         class="form-control"
         v-model="local_grade.pointGrade"
+        :min="0"
+        :step="0.01"
       />
     </div>
   </div>
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue";
-import { useGradesStore } from "../stores/grades";
+import { onMounted, ref } from "vue"
+import { useGradesStore } from "../stores/grades"
 
 const props = defineProps({
   grade: Object,
-});
+})
 
-const isEditable = ref(false);
+const isEditable = ref(false)
 const local_grade = ref({
   subjectCode: "",
-  units: "",
-  pointGrade: "",
-});
-const gradesStore = useGradesStore();
-const getGradeBySubjectCode = gradesStore.getGradeBySubjectCode;
+  units: 1,
+  pointGrade: 0,
+})
+const gradesStore = useGradesStore()
+const getGradeBySubjectCode = gradesStore.getGradeBySubjectCode
 
 onMounted(() => {
-  local_grade.value = { ...getGradeBySubjectCode(props.grade) };
-});
+  local_grade.value = { ...getGradeBySubjectCode(props.grade) }
+})
 
 const commitLocalGrade = (new_grade) => {
-  gradesStore.editGrade(new_grade);
-  isEditable.value = !isEditable.value;
-};
+  gradesStore.editGrade(new_grade)
+  isEditable.value = !isEditable.value
+}
 </script>
