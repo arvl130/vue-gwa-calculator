@@ -1,6 +1,7 @@
 # Vue GWA Calculator
 
-This website lets you easily calculate for General Weighted Average (GWA).
+As a scholar in our university, each new semester I have to calculate my General Weighted Average (GWA) and
+submit it to our scholarship sponsors. This an app I built to help me calculate it.
 
 ## Recommended IDE Setup
 
