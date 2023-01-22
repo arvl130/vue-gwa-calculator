@@ -1,9 +1,9 @@
 <script setup>
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap-icons/font/bootstrap-icons.css";
-import GradesForm from "./components/GradesForm.vue";
-import GradesList from "./components/GradesList.vue";
-import GradesResult from "./components/GradesResult.vue";
+import "bootstrap/dist/css/bootstrap.min.css"
+import "bootstrap-icons/font/bootstrap-icons.css"
+import GradesForm from "./components/GradesForm.vue"
+import GradesList from "./components/GradesList.vue"
+import GradesResult from "./components/GradesResult.vue"
 </script>
 
 <template>
@@ -29,4 +29,17 @@ import GradesResult from "./components/GradesResult.vue";
       <GradesResult />
     </div>
   </main>
+  <footer class="text-center px-2 py-3">Angelo Geulin &copy; 2023</footer>
 </template>
+
+<style>
+#app {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+footer {
+  font-weight: 500;
+}
+</style>
