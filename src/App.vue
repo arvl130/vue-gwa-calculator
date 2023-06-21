@@ -14,7 +14,20 @@ import GradesResult from "./components/GradesResult.vue"
       <a href="#" class="navbar-brand">GWA Calculator</a>
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <a class="nav-link" href="https://filipiknow.net/how-to-compute-gwa/">
+          <a
+            class="nav-link"
+            href="https://github.com/arvl130/vue-gwa-calculator"
+            target="_blank"
+          >
+            GitHub
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            href="https://filipiknow.net/how-to-compute-gwa/"
+            target="_blank"
+          >
             Learn How
           </a>
         </li>
