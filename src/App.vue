@@ -29,10 +29,23 @@ import GradesResult from "./components/GradesResult.vue"
       <GradesResult />
     </div>
   </main>
-  <footer class="text-center px-2 py-3">Angelo Geulin &copy; 2023</footer>
+  <footer class="text-center px-2 py-3">
+    <a href="https://github.com/arvl130" class="text-dark name-link"
+      >Angelo Geulin</a
+    >
+    &copy; 2023
+  </footer>
 </template>
 
 <style>
+.name-link {
+  text-decoration: none;
+}
+
+.name-link:hover {
+  text-decoration: underline;
+}
+
 #app {
   min-height: 100vh;
   display: grid;
