@@ -38,7 +38,11 @@
       </button>
     </div>
     <div class="col-6">
-      {{ props.grade.subjectCode }}
+      <input
+        type="text"
+        class="form-control"
+        v-model="local_grade.subjectCode"
+      />
     </div>
     <div class="col-2">
       <input
@@ -81,8 +85,20 @@ onMounted(() => {
   local_grade.value = { ...getGradeBySubjectCode(props.grade) }
 })
 
-const commitLocalGrade = (new_grade) => {
-  gradesStore.editGrade(new_grade)
+const commitLocalGrade = (newGrade) => {
+  // Make sure new subject code doesn't exist if we are changing it.
+  if (props.grade.subjectCode !== local_grade.value.subjectCode) {
+    const newSubjectCodeExists = gradesStore.grades.some(
+      (grade) => grade.subjectCode === newGrade.subjectCode
+    )
+
+    if (newSubjectCodeExists) {
+      alert("Cannot save. New subject code already in use.")
+      return
+    }
+  }
+
+  gradesStore.editGrade(props.grade.subjectCode, newGrade)
   isEditable.value = !isEditable.value
 }
 </script>

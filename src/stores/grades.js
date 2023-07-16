@@ -28,22 +28,42 @@ export const useGradesStore = defineStore({
 
       this.grades.unshift(newGrade)
     },
-    editGrade(newGrade) {
-      const hasMatching = this.grades.some(
-        (grade) => grade.subjectCode === newGrade.subjectCode
-      )
+    editGrade(subjectCode, newGrade) {
+      if (subjectCode === newGrade.subjectCode) {
+        // Not renaming
+        const hasMatching = this.grades.some(
+          (grade) => grade.subjectCode === subjectCode
+        )
 
-      if (!hasMatching) {
-        console.log("No matching grade found.")
-        return
-      }
-
-      this.grades = this.grades.map((grade) => {
-        if (grade.subjectCode === newGrade.subjectCode) {
-          return newGrade
+        if (!hasMatching) {
+          console.log("No matching grade found.")
+          return
         }
-        return grade
-      })
+
+        this.grades = this.grades.map((grade) => {
+          if (grade.subjectCode === subjectCode) {
+            return newGrade
+          }
+          return grade
+        })
+      } else {
+        // Renaming
+        const newSubjectCodeExists = this.grades.some(
+          (grade) => grade.subjectCode === newGrade.subjectCode
+        )
+
+        if (newSubjectCodeExists) {
+          console.log("Rename cancelled. New subject code is already in use.")
+          return
+        }
+
+        this.grades = this.grades.map((grade) => {
+          if (grade.subjectCode === subjectCode) {
+            return newGrade
+          }
+          return grade
+        })
+      }
     },
     deleteGrade(targetSubjectCode) {
       this.grades = this.grades.filter(
