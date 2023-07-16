@@ -28,7 +28,7 @@ export const useGradesStore = defineStore({
       ) {
         console.log("Found duplicate grade: Not adding.")
       } else {
-        this.grades.push(new_grade)
+        this.grades.unshift(new_grade)
       }
     },
     editGrade(new_grade) {
