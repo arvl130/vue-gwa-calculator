@@ -6,9 +6,6 @@ export const useGradesStore = defineStore({
     grades: [],
   }),
   getters: {
-    getGWA: (state) => {
-      return 1
-    },
     getGradeBySubjectCode: (state) => {
       return (givenGrade) => {
         return state.grades.find((grade) => {
@@ -19,29 +16,34 @@ export const useGradesStore = defineStore({
     },
   },
   actions: {
-    addGrade(new_grade) {
-      if (
-        this.grades.some((grade) => {
-          if (grade.subjectCode === new_grade.subjectCode) return true
-          return false
-        })
-      ) {
-        console.log("Found duplicate grade: Not adding.")
-      } else {
-        this.grades.unshift(new_grade)
-      }
-    },
-    editGrade(new_grade) {
-      if (
-        this.grades.some((grade) => grade.subjectCode === new_grade.subjectCode)
+    addGrade(newGrade) {
+      const hasDuplicate = this.grades.some(
+        (grade) => grade.subjectCode === newGrade.subjectCode
       )
-        this.grades = this.grades.map((grade) => {
-          if (grade.subjectCode === new_grade.subjectCode) {
-            return new_grade
-          }
-          return grade
-        })
-      else console.log("No matching grade found.")
+
+      if (hasDuplicate) {
+        console.log("Found duplicate grade: Not adding.")
+        return
+      }
+
+      this.grades.unshift(newGrade)
+    },
+    editGrade(newGrade) {
+      const hasMatching = this.grades.some(
+        (grade) => grade.subjectCode === newGrade.subjectCode
+      )
+
+      if (!hasMatching) {
+        console.log("No matching grade found.")
+        return
+      }
+
+      this.grades = this.grades.map((grade) => {
+        if (grade.subjectCode === newGrade.subjectCode) {
+          return newGrade
+        }
+        return grade
+      })
     },
     deleteGrade(targetSubjectCode) {
       this.grades = this.grades.filter(
